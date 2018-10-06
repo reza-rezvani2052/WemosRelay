@@ -12,35 +12,30 @@ http://chaluspl.dlinkddns.com:60978/url?relay=0&builtinled=1
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-//import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.app.AppCompatActivity;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -59,13 +54,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.util.Objects;
+//import android.support.v7.app.AlertDialog;
 
 public class MainActivity extends AppCompatActivity {
 
     ToggleButton tgbRelay;
     ToggleButton tgbBuiltinLed;
     ToggleButton tgbRelayAndBuiltinLed;
+
+    ImageView btnShowPopup;
 
     //...
     Typeface typeface;
@@ -80,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     String qryString = "";
 
-    //بسته باینکه بر روی اینترنت و یا شبکه محلی اجرا شود، لینگ زیر تغییر میکند
+    //بسته باینکه بر روی اینترنت و یا شبکه محلی اجرا شود، لینک زیر تغییر میکند
     //String urlTemplate = "http://192.168.1.150:60978/url?%s";
     //String urlTemplate = "http://chaluspl.dlinkddns.com:60978/url?%s";
     String urlTemplate = "";
@@ -99,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
     //...
 
-    // مدیریت دکمه ‍"بک" برای جلوگیری از خروج ناخواسته
+    // مدیریت دکمه ‍"بک" برای خروج از برنامه
     private long m_backPressed;
     private static final int TIME_INTERVAL = 2000; // # milliseconds
 
@@ -209,6 +206,50 @@ public class MainActivity extends AppCompatActivity {
         tgbBuiltinLed = findViewById(R.id.tgbBuiltinLed);
         tgbRelayAndBuiltinLed = findViewById(R.id.tgbRelayAndBuiltinLed);
 
+        //...
+
+        btnShowPopup = findViewById(R.id.btnShowPopup);
+        btnShowPopup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(MainActivity.this, btnShowPopup);
+                popupMenu.getMenuInflater().inflate(R.menu.menu_main, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(
+                        new PopupMenu.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+                                switch (item.getItemId()) {
+                                    case R.id.action_about:
+                                        //Dialog d = new Dialog(this);
+                                        //d.requestWindowFeature(Window.FEATURE_NO_TITLE); //d.setTitle("درباره برنامه");
+                                        //d.setContentView(R.layout.dialog_about);
+                                        //d.setCancelable(true);
+                                        //d.show();
+
+                                        Dialog d = new Dialog(MainActivity.this, R.style.PauseDialog);
+                                        d.requestWindowFeature(Window
+                                                .FEATURE_NO_TITLE); //d.setTitle("درباره برنامه");
+                                        d.setContentView(R.layout.dialog_about);
+                                        d.setCancelable(true);
+                                        d.show();
+
+                                        return true;
+                                    case R.id.action_options:
+                                        startActivity(new Intent(MainActivity.this, Settings.class));
+                                        return true;
+                                    case R.id.action_refresh_status:
+                                        onMenuRefreshStatusClicked();
+                                        return true;
+                                }
+                                return true;
+                            }
+                        }
+                );
+                popupMenu.show();
+            }
+        });
+
+        //...
         coordinatorLayout = findViewById(R.id.coordinatorLayout);
 
         //<editor-fold desc="نیازی به این بخش نیست. صرفا جهت آموزش هستند">
@@ -337,6 +378,12 @@ public class MainActivity extends AppCompatActivity {
                 refreshStatus();
             }
         });
+
+        //...
+
+        //NOTE: actionbar ra hambe toolbar ezafe kikonad!
+//        Toolbar toolbar = findViewById(R.id.customToolbar);
+//        setSupportActionBar(toolbar);
 
         //...
 
@@ -734,42 +781,6 @@ public class MainActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
         requestQueue.add(request);
-    }
-
-    //---------------------------------------------------------------------------------------------
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_about:
-//                Dialog d = new Dialog(this);
-//                d.requestWindowFeature(Window.FEATURE_NO_TITLE); //d.setTitle("درباره برنامه");
-//                d.setContentView(R.layout.dialog_about);
-//                d.setCancelable(true);
-//                d.show();
-
-                Dialog d = new Dialog(MainActivity.this, R.style.PauseDialog);
-                d.requestWindowFeature(Window.FEATURE_NO_TITLE); //d.setTitle("درباره برنامه");
-                d.setContentView(R.layout.dialog_about);
-                d.setCancelable(true);
-                d.show();
-
-                return true;
-            case R.id.action_options:
-                startActivity(new Intent(this, Settings.class));
-                return true;
-            case R.id.action_refresh_status:
-                onMenuRefreshStatusClicked();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     //---------------------------------------------------------------------------------------------
