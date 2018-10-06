@@ -16,6 +16,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    repositories {
+        maven { url "https://www.jitpack.io" }
+    }
+
 }
 
 dependencies {
@@ -31,5 +36,9 @@ dependencies {
     implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.android.support:design:28.0.0'
+
+
+    //    compile 'com.github.hujiaweibujidao:wava:1.0.0'
+    implementation 'com.github.hujiaweibujidao:wava:1.0.0'
 
 }
