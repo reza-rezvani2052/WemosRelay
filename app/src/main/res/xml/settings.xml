@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <PreferenceCategory android:title="تنظیمات شماره پورت و URL">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="chk_run_on_internet"
+            android:summary="در این قسمت میتوانید مشخص کنید که برنامه بر روی اینترنت اجرا شود و یا لوکال"
+            android:summaryOff="بر روی شبکه محلی اجرا میشود"
+            android:summaryOn="بر روی اینترنت اجرا میشود"
+            android:title="نحوه اجرای برنامه" />
+        <EditTextPreference
+            android:allowUndo="true"
+            android:defaultValue="60978"
+            android:editable="true"
+            android:key="edt_port_number"
+            android:numeric="integer"
+            android:phoneNumber="true"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="شماره پورت" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="روشن بودن نمایشگر">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="chk_keep_screen_on"
+            android:title="نمایشگر همیشه روشن باشد" />
+    </PreferenceCategory>
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="chk_check_state_at_start"
+        android:title="بررسی وضعیت در شروع برنامه" />
+
+
+
+</PreferenceScreen>

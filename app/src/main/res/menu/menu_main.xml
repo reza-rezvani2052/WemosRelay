@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+
+    <item
+        android:id="@+id/action_refresh_status"
+        android:icon="@android:drawable/ic_menu_rotate"
+        android:orderInCategory="101"
+        app:showAsAction="ifRoom"
+        android:title="@string/title_activity_update" />
+
+    <item
+        android:id="@+id/action_options"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:orderInCategory="102"
+        android:title="@string/title_activity_options" />
+
+    <item
+        android:id="@+id/action_about"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:orderInCategory="103"
+        android:title="@string/title_activity_about" />
+
+</menu>
