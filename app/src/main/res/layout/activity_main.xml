@@ -25,10 +25,10 @@
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_marginEnd="8dp"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/bulb_on" />
+                app:srcCompat="@drawable/ic_launcher" />
 
             <com.shahraksoft.wemos_relay.MyTextView
                 android:id="@+id/textView"

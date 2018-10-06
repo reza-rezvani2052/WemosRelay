@@ -54,7 +54,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-//import android.support.v7.app.AlertDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -108,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //...
 
-        if (isConnectedToInternet()) {
+        if (Utility.isConnectedToInternet()) {
             init();
             changeAppFont();
 
@@ -189,15 +188,6 @@ public class MainActivity extends AppCompatActivity {
         //--------------------------------------------------------------------
 
 
-    }
-
-    public boolean isConnectedToInternet() {
-        ConnectivityManager manager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        if (manager == null)
-            return false;
-
-        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
-        return (networkInfo != null && networkInfo.isConnected());
     }
 
     private void init() {
@@ -442,7 +432,6 @@ public class MainActivity extends AppCompatActivity {
         updateUrlTemplate();
         //...
         setKeepScreenOn(isScreenAlwaysOn());
-
         //...
 
     }
@@ -507,28 +496,6 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //...
-                        //<editor-fold desc="این قسمت صرفا جهت آموزش است">
-                        JUST_FOR_TUT:
-                        {
-                        /*
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jsonObject = jsonArray.getJSONObject(0);
-                                String passage = jsonObject.getString("matn");
-
-                                tvData.setText(passage);
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        */
-                        }
-                        //</editor-fold>
-                        //...
 
                         if (finalTgb == tgbRelayAndBuiltinLed) {
                             boolean isTgbRelayAndBuiltinLedChecked = finalTgb.isChecked();
@@ -590,7 +557,7 @@ public class MainActivity extends AppCompatActivity {
                 finalTgb.setButtonDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.bulb_broken));
 
 
-                if (!isConnectedToInternet()) {
+                if (!Utility.isConnectedToInternet()) {
                     startActivity(new Intent(MainActivity.this, NoInternetActivity.class));
                     MainActivity.this.finish();
                 } else {
@@ -724,7 +691,7 @@ public class MainActivity extends AppCompatActivity {
                 swipeRefreshLayout.setRefreshing(false);
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
-                if (!isConnectedToInternet()) {
+                if (!Utility.isConnectedToInternet()) {
                     startActivity(new Intent(MainActivity.this, NoInternetActivity.class));
                     MainActivity.this.finish();
                 } else {
