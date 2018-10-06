@@ -5,9 +5,9 @@ import android.graphics.Typeface;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
-public class MyTextView extends AppCompatTextView {
+import java.lang.reflect.Type;
 
-    //static Typeface tf;
+public class MyTextView extends AppCompatTextView {
 
     public MyTextView(Context context) {
         super(context);
@@ -25,12 +25,7 @@ public class MyTextView extends AppCompatTextView {
     }
 
     private void init() {
-
-      //Typeface  tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/BKARIMBD.TTF");
-//      Typeface  tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/vazir/Vazir.ttf");
-      Typeface  tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/Yekan.ttf");
-      setTypeface(tf, 1);
-
+        setTypeface(Utility.getTypeFace(), Typeface.NORMAL);
     }
 
 }

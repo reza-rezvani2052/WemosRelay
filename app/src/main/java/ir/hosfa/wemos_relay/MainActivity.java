@@ -64,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
     ImageView btnShowPopup;
 
     //...
-    Typeface typeface;
-    //...
     AlertDialog.Builder builder;
     //...
     CoordinatorLayout coordinatorLayout;
@@ -163,13 +161,13 @@ public class MainActivity extends AppCompatActivity {
     void changeAppFont() {
         //NOTE:*  fonte barname ra avaz konam
 
-        tgbRelay.setTypeface(typeface);
+        tgbRelay.setTypeface(Utility.getTypeFace());
         tgbRelay.setTextSize(18);
 
-        tgbBuiltinLed.setTypeface(typeface);
+        tgbBuiltinLed.setTypeface(Utility.getTypeFace());
         tgbBuiltinLed.setTextSize(18);
 
-        tgbRelayAndBuiltinLed.setTypeface(typeface);
+        tgbRelayAndBuiltinLed.setTypeface(Utility.getTypeFace());
         tgbRelayAndBuiltinLed.setTextSize(18);
 
         //--------------------------------------------------------------------
@@ -241,16 +239,6 @@ public class MainActivity extends AppCompatActivity {
 
         //...
         coordinatorLayout = findViewById(R.id.coordinatorLayout);
-
-        //<editor-fold desc="نیازی به این بخش نیست. صرفا جهت آموزش هستند">
-        tgbRelay.setTag("TgbRelay");
-        tgbBuiltinLed.setTag("TgbBuiltinLed");
-        tgbRelayAndBuiltinLed.setTag("TgbRelayAndBuiltinLed");
-        //</editor-fold>
-
-        //...
-        //typeface = Typeface.createFromAsset(getAssets(), "fonts/BKARIMBD.TTF");
-        typeface = Typeface.createFromAsset(getAssets(), "fonts/Yekan.ttf");
         //...
 
         //builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
@@ -396,12 +384,12 @@ public class MainActivity extends AppCompatActivity {
         //snackbarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         TextView tvSnackbarText = snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-        tvSnackbarText.setTypeface(typeface);
+        tvSnackbarText.setTypeface(Utility.getTypeFace());
         tvSnackbarText.setTextSize(16);
         //tvSnackbarText.setTextColor(Color.WHITE);
 
         TextView tvSnackbarAction = snackbarView.findViewById(android.support.design.R.id.snackbar_action);
-        tvSnackbarAction.setTypeface(typeface);
+        tvSnackbarAction.setTypeface(Utility.getTypeFace());
         tvSnackbarAction.setTextSize(14);
         snackbar.setActionTextColor(Color.RED);    // tvSnackbarAction.setTextColor(Color.RED);
 
