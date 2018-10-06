@@ -1,4 +1,4 @@
-package com.shahraksoft.wemos_relay;
+package ir.hosfa.wemos_relay;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;

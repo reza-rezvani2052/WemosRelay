@@ -1,11 +1,11 @@
-package com.shahraksoft.wemos_relay;
+package ir.hosfa.wemos_relay;
 
 import android.app.Application;
 import android.content.Context;
 
 public class G extends Application {
 
-    static Context context;
+    public static Context context;
 
     @Override
     public void onCreate() {

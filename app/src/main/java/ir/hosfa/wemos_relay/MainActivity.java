@@ -1,4 +1,4 @@
-package com.shahraksoft.wemos_relay;
+package ir.hosfa.wemos_relay;
 
 //<editor-fold desc="نمونه های یو آر ال">
 /*
