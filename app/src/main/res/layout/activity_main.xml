@@ -30,7 +30,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/ic_launcher" />
 
-            <com.shahraksoft.wemos_relay.MyTextView
+            <ir.hosfa.wemos_relay.MyTextView
                 android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
