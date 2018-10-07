@@ -1,4 +1,4 @@
-package ir.hosfa.wemos_relay;
+package Extra;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -7,7 +7,7 @@ import android.net.NetworkInfo;
 
 public class Utility {
 
-    static Typeface typeface;
+    private static Typeface typeface;
 
     //-------------------------------------------------------------------------------------------
 
@@ -21,7 +21,7 @@ public class Utility {
 
     //-------------------------------------------------------------------------------------------
 
-    static boolean isConnectedToInternet() {
+    public static boolean isConnectedToInternet() {
         ConnectivityManager manager = (ConnectivityManager) G.context.getSystemService(
                 Context.CONNECTIVITY_SERVICE);
         if (manager == null)

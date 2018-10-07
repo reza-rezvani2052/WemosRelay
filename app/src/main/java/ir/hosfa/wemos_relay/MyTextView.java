@@ -5,7 +5,7 @@ import android.graphics.Typeface;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
-import java.lang.reflect.Type;
+import Extra.Utility;
 
 public class MyTextView extends AppCompatTextView {
 

@@ -1,9 +1,8 @@
-package ir.hosfa.wemos_relay;
+package Extra;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
-import android.graphics.Typeface;
 
 public class G extends Application {
 
@@ -15,7 +14,6 @@ public class G extends Application {
         super.onCreate();
         //...
         context = getApplicationContext();
-
     }
 
 }
