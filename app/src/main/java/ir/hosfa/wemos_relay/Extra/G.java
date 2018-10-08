@@ -1,4 +1,4 @@
-package Extra;
+package ir.hosfa.wemos_relay.Extra;
 
 import android.annotation.SuppressLint;
 import android.app.Application;

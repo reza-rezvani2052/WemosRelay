@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import com.github.hujiaweibujidao.wava.Techniques;
 import com.github.hujiaweibujidao.wava.YoYo;
 
-import Extra.Utility;
+import ir.hosfa.wemos_relay.Extra.Utility;
 
 public class NoInternetActivity extends AppCompatActivity {
 

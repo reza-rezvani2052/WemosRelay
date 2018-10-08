@@ -5,7 +5,7 @@ import android.graphics.Typeface;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
-import Extra.Utility;
+import ir.hosfa.wemos_relay.Extra.Utility;
 
 public class MyTextView extends AppCompatTextView {
 
