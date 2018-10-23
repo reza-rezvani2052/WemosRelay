@@ -556,16 +556,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
-        }); /*{   // baraye metode post in niaz mishe
-            Map<String, String> params = new HashMap<>();
-
-            @Override
-            public Map<String, String> getParams() {
-                params.put("relay", 1 + "");
-                //params.put("xxx", 0 );
-                return params;
-            }
-        };*/
+        });
 
         //...
 
@@ -662,6 +653,7 @@ public class MainActivity extends AppCompatActivity {
                                     Snackbar.LENGTH_LONG).show();
 
                             //TODO: LAMPHA RA UPDAE KONAM
+
                         }
 
                         //...
