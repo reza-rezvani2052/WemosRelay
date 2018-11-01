@@ -10,6 +10,10 @@ http://chaluspl.dlinkddns.com:60978/url?relay=0&builtinled=1
 //</editor-fold>
 
 
+//TODO: az transition va animation dar zamane load shodane dokmeha estefadeh konam
+// az fingerprint ham shayad badan estefadeh konam
+// esme barname ra dar launchere android latinkonam ---> WemosRelay
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -26,11 +30,14 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -85,7 +92,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Runnable runnable = new Runnable() {
         @Override
-        public void run() {
+        public void run()
+        {
             progressDialog.dismiss();
         }
     };
@@ -99,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
     //...
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //...
@@ -117,7 +126,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart()
+    {
         super.onStart();
         //...
         //TODO: **shayad niaz nabashad ke inj bashad!
@@ -125,39 +135,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
         //...
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         if (m_backPressed + TIME_INTERVAL > System.currentTimeMillis()) {
             super.onBackPressed();
         } else {
             m_backPressed = System.currentTimeMillis();
 
-            Toast toast = Toast.makeText(this, "کلید بازگشت را دوباره بفشارید",
-                    Toast.LENGTH_SHORT);
-            //toast.getView().setBackgroundColor(0xFF7282DB);
-            //toast.getView().setBackgroundColor(0x1A237E);  // in baes mishe bg hide beshe va faghat text show beshe
-            toast.getView().setBackgroundColor(0xFF1A237E);
+            View layout = getLayoutInflater().inflate(R.layout.custom_toast, null);
 
-            //TODO:* badan range matne toast ra avaz konam(sefid konam), font va size_font ra ham avaz konam
-            //TextView tvToast = toast.getView().findViewById(android.support.design.R.id.toast);
+            //TextView tv = layout.findViewById(R.id.tvExitMessage);
+            //tv.setText("کلید بازگشت را دوباره بفشارید");
 
+            Toast toast = new Toast(this);
+            toast.setGravity(Gravity.CENTER | Gravity.BOTTOM, 0, 9);
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
             toast.show();
         }
     }
 
-    private void setKeepScreenOn(boolean keepScreenOn) {
+    private void setKeepScreenOn(boolean keepScreenOn)
+    {
         if (keepScreenOn)
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         else
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
-    void changeAppFont() {
+    void changeAppFont()
+    {
         //NOTE:*  fonte barname ra avaz konam
 
         tgbRelay.setTypeface(Utility.getTypeFace());
@@ -187,7 +201,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void init() {
+    private void init()
+    {
 
         tgbRelay = findViewById(R.id.tgbRelay);
         tgbBuiltinLed = findViewById(R.id.tgbBuiltinLed);
@@ -198,13 +213,15 @@ public class MainActivity extends AppCompatActivity {
         btnShowPopup = findViewById(R.id.btnShowPopup);
         btnShowPopup.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 PopupMenu popupMenu = new PopupMenu(MainActivity.this, btnShowPopup);
                 popupMenu.getMenuInflater().inflate(R.menu.menu_main, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(
                         new PopupMenu.OnMenuItemClickListener() {
                             @Override
-                            public boolean onMenuItemClick(MenuItem item) {
+                            public boolean onMenuItemClick(MenuItem item)
+                            {
                                 switch (item.getItemId()) {
                                     case R.id.action_about:
                                         //Dialog d = new Dialog(this);
@@ -245,7 +262,8 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle("خطا")
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton("تایید", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
                     }
                 });
 
@@ -269,7 +287,8 @@ public class MainActivity extends AppCompatActivity {
 
         tgbRelay.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 qryString = tgbRelay.isChecked() ? "relay=1" : "relay=0";
                 progressDialog.setMessage(tgbRelay.isChecked() ? "روشن کردن رله" : "خاموش کردن رله");
                 executeUrl(tgbRelay);
@@ -277,7 +296,8 @@ public class MainActivity extends AppCompatActivity {
         });
         tgbRelay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
                 //getDrawable az API 21 be ba'ad kar mikoneh. man min API ra 19 gereftam
 //                tgbRelay.setButtonDrawable(isChecked ?
 //                        getDrawable(R.drawable.bulb_on) : getDrawable(R.drawable.bulb_off)
@@ -292,7 +312,8 @@ public class MainActivity extends AppCompatActivity {
 
         tgbBuiltinLed.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 qryString = tgbBuiltinLed.isChecked() ? "builtinled=1" : "builtinled=0";
                 progressDialog.setMessage(
                         tgbBuiltinLed.isChecked() ? "روشن کردن ال ای دی توکار" : "خاموش کردن ال ای دی توکار");
@@ -301,7 +322,8 @@ public class MainActivity extends AppCompatActivity {
         });
         tgbBuiltinLed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
 //                tgbBuiltinLed.setButtonDrawable(isChecked ?
 //                        getDrawable(R.drawable.bulb_on) : getDrawable(R.drawable.bulb_off)
 //                );
@@ -313,7 +335,8 @@ public class MainActivity extends AppCompatActivity {
 
         tgbRelayAndBuiltinLed.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 //                if (true)
 //                    return;
 
@@ -325,7 +348,8 @@ public class MainActivity extends AppCompatActivity {
         });
         tgbRelayAndBuiltinLed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
 //                tgbRelayAndBuiltinLed.setButtonDrawable(isChecked ?
 //                        getDrawable(R.drawable.bulb_on) : getDrawable(R.drawable.bulb_off)
 //                );
@@ -345,7 +369,8 @@ public class MainActivity extends AppCompatActivity {
                 ContextCompat.getColor(this, R.color.colorPrimaryDark));
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh() {
+            public void onRefresh()
+            {
 
                 //Disble activity :
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
@@ -371,9 +396,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //---------------------------------------------------------------------------------------------
-
-    private Snackbar createErrorSnakbar() {
+    private Snackbar createErrorSnakbar()
+    {
         Snackbar snackbar = Snackbar.make(coordinatorLayout, "خطایی رخ داده است",
                 Snackbar.LENGTH_LONG);
         snackbar.setDuration(5000);
@@ -396,7 +420,8 @@ public class MainActivity extends AppCompatActivity {
 
         snackbar.setAction("شرح خطا", new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 builder.show();
             }
         });
@@ -405,9 +430,8 @@ public class MainActivity extends AppCompatActivity {
         return snackbar;
     }
 
-    //---------------------------------------------------------------------------------------------
-
-    void updateUrlTemplate() {
+    void updateUrlTemplate()
+    {
         String portNumber = getDefaultPortNumber();
 
         urlTemplate = isAppRunOnInternet() ?
@@ -415,7 +439,8 @@ public class MainActivity extends AppCompatActivity {
                 "http://192.168.1.150:" + portNumber + "/url?%s";
     }
 
-    void readSharedPreferencesSettings() {
+    void readSharedPreferencesSettings()
+    {
         updateUrlTemplate();
         //...
         setKeepScreenOn(isScreenAlwaysOn());
@@ -423,32 +448,36 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    boolean isCheckStatusOnStartup() {
+    boolean isCheckStatusOnStartup()
+    {
         return sharedPreferences.getBoolean("chk_check_state_at_start", true);
     }
 
-    boolean isAppRunOnInternet() {
+    boolean isAppRunOnInternet()
+    {
         return sharedPreferences.getBoolean("chk_run_on_internet", true);
     }
 
-    boolean isScreenAlwaysOn() {
+    boolean isScreenAlwaysOn()
+    {
         return sharedPreferences.getBoolean("chk_keep_screen_on", true);
     }
 
-    String getDefaultPortNumber() {
+    String getDefaultPortNumber()
+    {
         return sharedPreferences.getString("edt_port_number", "60978");
     }
 
-    //---------------------------------------------------------------------------------------------
-
-    private void hideProgressDialog() {
+    private void hideProgressDialog()
+    {
         //QTimer::singleShot(2000, SLOT(runnable) )
 
         if (progressDialog.isShowing())
             handler.postDelayed(runnable, 200);
     }
 
-    private void executeUrl(View sender) {
+    private void executeUrl(View sender)
+    {
 
         ToggleButton tgb;
 
@@ -482,7 +511,8 @@ public class MainActivity extends AppCompatActivity {
                 urlFinal,
                 new Response.Listener<String>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(String response)
+                    {
 
                         if (finalTgb == tgbRelayAndBuiltinLed) {
                             boolean isTgbRelayAndBuiltinLedChecked = finalTgb.isChecked();
@@ -536,7 +566,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error)
+            {
                 hideProgressDialog();
 
                 finalTgb.setChecked(!finalTgb.isChecked());
@@ -570,14 +601,16 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(request);
     }
 
-    public void onMenuRefreshStatusClicked() {
+    public void onMenuRefreshStatusClicked()
+    {
         progressDialog.setMessage("در حال بروز رسانی وضعیت");
         progressDialog.show();
         //...
         refreshStatus();
     }
 
-    private void refreshStatus() {
+    private void refreshStatus()
+    {
 
         updateUrlTemplate();
         //...
@@ -588,7 +621,8 @@ public class MainActivity extends AppCompatActivity {
                 urlFinal,
                 new Response.Listener<String>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(String response)
+                    {
 
                         hideProgressDialog();
                         //...
@@ -663,7 +697,8 @@ public class MainActivity extends AppCompatActivity {
                     } // End of:  public void onResponse(String response)
                 }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error)
+            {
 
                 hideProgressDialog();
                 //...
@@ -728,7 +763,5 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
         requestQueue.add(request);
     }
-
-    //---------------------------------------------------------------------------------------------
 
 }

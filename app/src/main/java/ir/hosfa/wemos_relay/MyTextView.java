@@ -9,22 +9,26 @@ import ir.hosfa.wemos_relay.Extra.Utility;
 
 public class MyTextView extends AppCompatTextView {
 
-    public MyTextView(Context context) {
+    public MyTextView(Context context)
+    {
         super(context);
         init();
     }
 
-    public MyTextView(Context context, AttributeSet attrs) {
+    public MyTextView(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
         init();
     }
 
-    public MyTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MyTextView(Context context, AttributeSet attrs, int defStyleAttr)
+    {
         super(context, attrs, defStyleAttr);
         init();
     }
 
-    private void init() {
+    private void init()
+    {
         setTypeface(Utility.getTypeFace(), Typeface.NORMAL);
     }
 

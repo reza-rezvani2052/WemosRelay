@@ -19,7 +19,8 @@ public class NoInternetActivity extends AppCompatActivity {
     Button btnCheckInternetAgain;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_no_internet);
         //...
@@ -42,7 +43,8 @@ public class NoInternetActivity extends AppCompatActivity {
 
     }
 
-    public void onBtnCheckInternetAgain(View view) {
+    public void onBtnCheckInternetAgain(View view)
+    {
         if (Utility.isConnectedToInternet()) {
             startActivity(new Intent(this, MainActivity.class));
             //...
