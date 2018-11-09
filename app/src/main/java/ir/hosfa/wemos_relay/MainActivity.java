@@ -31,13 +31,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -232,7 +230,8 @@ public class MainActivity extends AppCompatActivity {
 
                                         Dialog d = new Dialog(MainActivity.this, R.style.PauseDialog);
                                         d.requestWindowFeature(Window
-                                                .FEATURE_NO_TITLE); //d.setTitle("درباره برنامه");
+                                                .FEATURE_NO_TITLE);
+                                        //d.setTitle("درباره برنامه");
                                         d.setContentView(R.layout.dialog_about);
                                         d.setCancelable(true);
                                         d.show();
@@ -396,7 +395,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private Snackbar createErrorSnakbar()
+    private Snackbar createErrorSnackbar()
     {
         Snackbar snackbar = Snackbar.make(coordinatorLayout, "خطایی رخ داده است",
                 Snackbar.LENGTH_LONG);
@@ -583,7 +582,7 @@ public class MainActivity extends AppCompatActivity {
                     if (msgErr == null)
                         msgErr = "عدم دریافت پاسخ از سرویس دهنده";
                     builder.setMessage("خطایی به شرح زیر رخ داده است:" + "\n" + msgErr);
-                    createErrorSnakbar().show();
+                    createErrorSnackbar().show();
                 }
 
             }
@@ -746,7 +745,7 @@ public class MainActivity extends AppCompatActivity {
 
                     //...
                     builder.setMessage(msgErr);
-                    createErrorSnakbar().show();
+                    createErrorSnackbar().show();
 
                 }
             }

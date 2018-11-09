@@ -65,6 +65,10 @@
     </android.support.v7.widget.Toolbar>
 
 
+    <!--TODO:-->
+    <!--android:fitsSystemWindows="true"-->
+
+
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
